@@ -9,14 +9,14 @@ class Server {
   constructor (server = express())
   { 
     this.middlewares(server)
-    this.database() 
+    this.database()
     server.use(routes)
     this.initializeServer(server)
 
   }
 
   async middlewares(app) {
-    app.use(cors())
+    app.use(cors()) 
     app.use(express.json())
   }
 
@@ -35,4 +35,4 @@ class Server {
   }
 }
 
-module.exports = { Server } 
+module.exports = { Server }
