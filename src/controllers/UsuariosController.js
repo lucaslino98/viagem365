@@ -24,6 +24,16 @@ class usuarioController {
                 return res.status(400).json({ erro: 'A data de nascimento deve estar no formato AAAA-MM-DD' })
             }
 
+            const existe_cpf = await Usuario.findOne({ where: { cpf } });
+            const existe_email = await Usuario.findOne({ where: { email } });
+
+            if (existe_cpf) {
+                return res.status(409).json({ erro: 'Já existe cadastro com este CPF.' })
+            }
+            if (existe_email) {
+                return res.status(409).json({ erro: 'Já existe cadastro com este e-mail.' })
+            }
+
             const usuario = await Usuario.create({
                 nome,
                 sexo,
@@ -35,6 +45,7 @@ class usuarioController {
 
             res.status(201).json(usuario)
         } catch (error) {
+            console.log(error)
             res.status(500).json({ erro: 'Não foi possível efetuar o cadastro, revise as informações' })
         }
 
