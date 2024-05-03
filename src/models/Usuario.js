@@ -15,6 +15,14 @@ const Usuario = connection.define('usuarios', {
         unique: true,
         allowNull: false
     },
+    data_nascimento: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    endereco: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     email: {
         type: DataTypes.STRING,
         unique: true,
@@ -22,10 +30,6 @@ const Usuario = connection.define('usuarios', {
     },
     senha: {
         type: DataTypes.STRING,
-        allowNull: false
-    },
-    data_nascimento: {
-        type: DataTypes.DATE,
         allowNull: false
     }
 })

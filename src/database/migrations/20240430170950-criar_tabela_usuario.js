@@ -22,16 +22,20 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      data_nascimento: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      endereco: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       email: {
         type: Sequelize.STRING,
         allowNull: false
       },
       senha: {
         type: Sequelize.STRING,
-        allowNull: false
-      },
-      data_nascimento: {
-        type: Sequelize.DATE,
         allowNull: false
       },
       createdAt: {
@@ -48,7 +52,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-     await queryInterface.dropTable('usuarios');
-     
+    await queryInterface.dropTable('usuarios');
+
   }
 };
