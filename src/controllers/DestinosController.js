@@ -14,7 +14,7 @@ class DestinosController {
             if (!descricao) {
                 return res.status(400).json({ error: 'Descrição obrigatória, favor fazer uma breve descrição da localidade.' })
             }
-            
+
             const existeUsuario = await Usuario.findByPk(usuario_id);
             if (!existeUsuario) {
                 return res.status(400).json({ error: 'Usuário não encontrado' });
@@ -80,8 +80,46 @@ class DestinosController {
         }
     }
 
+    async atualizarDestino(req, res) {
+        const { id } = req.params
+        const { cep, descricao, latitude, longetude, endereco } = req.body
+        try {
+            const destino = await Destino.findByPk(id)
+            if (!destino) {
+                res.status(400).json({ error: 'Este destino não foi encontrado, favor verificar!' })
+            }
+            await destino.update({
+                cep,
+                descricao,
+                latitude,
+                longetude,
+                endereco
+            })
+            await destino.save()
+            res.status(200).json({ menssagem: "Alterado com sucesso" })
+        } catch (error) {
+            console.log(error)
+            res.status(400).json({ error: 'Error ao atulizar o destino' })
+        }
+    }
 
-
+    async deletarDestino(req, res) {
+        const { id } = req.params
+        try {
+            const destino = Destino.findByPk(id)
+            if (!destino) {
+                res.status(400).json({ error: 'Este destino não existe, favor verificar!' })
+            }
+            Destino.destroy({
+                where: {
+                    id
+                }
+            })
+            res.status(204).json({ mensagem: 'Destino excluído' })
+        } catch (error) {
+            res.status(400).json(error)
+        }
+    }
 
 }
 

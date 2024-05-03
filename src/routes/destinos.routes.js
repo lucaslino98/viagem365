@@ -4,7 +4,9 @@ const DestinosController = require('../controllers/DestinosController')
 const DestinosRoutes = new Router()
 
 DestinosRoutes.post('/', DestinosController.cadastrarDestino)
-DestinosRoutes.get('/', DestinosController.listaDestino)
-DestinosRoutes.get('/:id', DestinosController.listarDestinoDeUsuario)
+DestinosRoutes.get('/', auth, DestinosController.listaDestino)
+DestinosRoutes.get('/:id', auth, DestinosController.listarDestinoDeUsuario)
+DestinosRoutes.put('/:id', auth, DestinosController.atualizarDestino)
+DestinosRoutes.delete('/:id', auth, DestinosController.deletarDestino)
 
 module.exports = DestinosRoutes
