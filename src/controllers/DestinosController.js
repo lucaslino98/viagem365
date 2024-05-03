@@ -98,7 +98,6 @@ class DestinosController {
             await destino.save()
             res.status(200).json({ menssagem: "Alterado com sucesso" })
         } catch (error) {
-            console.log(error)
             res.status(400).json({ error: 'Error ao atulizar o destino' })
         }
     }
@@ -106,7 +105,7 @@ class DestinosController {
     async deletarDestino(req, res) {
         const { id } = req.params
         try {
-            const destino = Destino.findByPk(id)
+            const destino = await Destino.findByPk(id)
             if (!destino) {
                 res.status(400).json({ error: 'Este destino não existe, favor verificar!' })
             }
@@ -117,6 +116,7 @@ class DestinosController {
             })
             res.status(204).json({ mensagem: 'Destino excluído' })
         } catch (error) {
+            console.log(error)
             res.status(400).json(error)
         }
     }
