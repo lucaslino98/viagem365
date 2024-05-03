@@ -110,7 +110,7 @@ class DestinosController {
             if (!destino) {
                 res.status(400).json({ error: 'Este destino não existe, favor verificar!' })
             }
-            Destino.destroy({
+            destino.destroy({
                 where: {
                     id
                 }
