@@ -10,21 +10,22 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nome_destino: {
-        type: Sequelize.STRING,
+      cep: {
+        type: Sequelize.INTEGER,
         allowNull: false
       },
       descricao: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      localidade: {
-        type: Sequelize.STRING,
-        allowNull: false
+      endereco: {
+        type: Sequelize.STRING
       },
-      coordenadas_geograficas: {
-        type: Sequelize.STRING,
-        allowNull: false
+      latitude: {
+        type: Sequelize.STRING
+      },
+      longetude: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

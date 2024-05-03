@@ -1,16 +1,47 @@
 const Destino = require('../models/Destino')
-
+const Usuario = require('../models/Usuario')
+const axios = require('axios')
 class DestinosController {
 
     async cadastrarDestino(req, res) {
+
         try {
-            const { nome_destino, descricao, localidade, coordenadas_geograficas, usuario_id } = req.body
+            const { cep, descricao, usuario_id } = req.body
+
+            if (!cep) {
+                return res.status(400).json({ error: 'Favor verificar o CEP(É obrigatório)' })
+            }
+            if (!descricao) {
+                return res.status(400).json({ error: 'Descrição obrigatória, favor fazer uma breve descrição da localidade.' })
+            }
+            
+            const existeUsuario = await Usuario.findByPk(usuario_id);
+            if (!existeUsuario) {
+                return res.status(400).json({ error: 'Usuário não encontrado' });
+            }
+            if (!usuario_id) {
+                return res.status(400).json({ error: 'ID do usuario obrigatório, favor verificar.' })
+            }
+
+            const ceps = req.body.cep
+            let buscaCoordenadas = await axios.get(`https://nominatim.openstreetmap.org/search?postalcode=${ceps}&format=json&addressdetails=1&limit=1`);
+            let lat = null;
+            let lon = null;
+            let display_name = null;
+
+            if (buscaCoordenadas.data && buscaCoordenadas.data.length > 0) {
+                lat = buscaCoordenadas.data[0].lat
+                lon = buscaCoordenadas.data[0].lon
+                display_name = buscaCoordenadas.data[0].display_name
+            }
+
 
             const destino = await Destino.create({
-                nome_destino,
+                cep,
                 descricao,
-                localidade,
-                coordenadas_geograficas,
+                latitude: lat,
+                longetude: lon,
+                endereco: display_name,
                 usuario_id
             })
             res.status(201).json(destino)

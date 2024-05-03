@@ -3,7 +3,7 @@ const Usuario = require('../models/Usuario')
 class usuarioController {
     async cadastrarUsuario(req, res) {
         try {
-            const { nome, sexo, cpf, email, senha, data_nascimento } = req.body
+            const { nome, sexo, cpf, email, senha, endereco, data_nascimento } = req.body
 
             if (!nome) {
                 return res.status(400).json({ erro: 'O nome deve ser informado' })
@@ -14,8 +14,11 @@ class usuarioController {
             if (!cpf) {
                 return res.status(400).json({ erro: 'O cpf deve ser informado' })
             }
-            if (cpf > 11) {
-                return res.status(400).json({ erro: 'Deve ser informado os 11 números do seu CPF.' })
+            // if (cpf > 11) {
+            //     return res.status(400).json({ erro: 'Deve ser informado os 11 números do seu CPF.' })
+            // }
+            if (!endereco) {
+                return res.status(400).json({ erro: 'O endereço deve ser informado' })
             }
             if (!email) {
                 return res.status(400).json({ erro: 'O email deve ser informado' })
@@ -41,6 +44,7 @@ class usuarioController {
                 nome,
                 sexo,
                 cpf,
+                endereco,
                 email,
                 senha,
                 data_nascimento
