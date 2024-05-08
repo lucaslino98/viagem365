@@ -13,15 +13,14 @@ class LoginController {
                 return res.status(400).json({ erro: 'Informe a sua senha' })
             }
 
-            const aluno = await Usuario.findOne({
+            const usuario = await Usuario.findOne({
                 where: { email: email, senha: senha }
             })
-            if (!aluno) {
-                return res.status(404).json({ erro: 'Nenhum aluno corresponde ao email e senha informados' })
+            if (!usuario) {
+                return res.status(404).json({ erro: 'Nenhum usuario corresponde ao email e senha informados' })
             }
 
-            const payload = { sub: aluno.id, email: aluno.email, nome: aluno.nome }
-
+            const payload = { usuario_id: usuario.id, email: usuario.email, nome: usuario.nome }
             const token = sign(payload, process.env.SECRET_JWT)
 
             res.status(200).json({ Token: token })
