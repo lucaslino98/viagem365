@@ -3,7 +3,7 @@ const { auth } = require('../middleware/auth')
 const DestinosController = require('../controllers/DestinosController')
 const DestinosRoutes = new Router()
 
-DestinosRoutes.post('/', DestinosController.cadastrarDestino)
+DestinosRoutes.post('/', auth, DestinosController.cadastrarDestino)
 DestinosRoutes.get('/', auth, DestinosController.listaDestino)
 DestinosRoutes.get('/:id', auth, DestinosController.listarDestinoDeUsuario)
 DestinosRoutes.put('/:id', auth, DestinosController.atualizarDestino)

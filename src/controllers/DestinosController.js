@@ -5,11 +5,33 @@ const axios = require('axios')
 class DestinosController {
 
     async cadastrarDestino(req, res) {
+/* 
+ 
+            #swagger.tags = ['Destinos'],
+            #swagger.parameters['body'] = {
+                in: 'body',
+                description: 'Adiciona um novo Destino',
+                schema: {
+                $nome_destino:"Praia de gov"
+                $cep:"88190000"
+                $descricao:"boa praia"
+                $latitude: "123123"
+                $longetude:"44421"
+                $endereco: "hipotito de azevedo"
+                $usuario_id: 2
+            }
+        }
+    
 
+*/
         try {
-            const { cep, descricao } = req.body
+            const { cep, descricao, nome_destino } = req.body
             const decoded = verify(req.headers.authorization, process.env.SECRET_JWT)
             const usuario_inf = decoded.usuario_id
+
+            if (!nome_destino) {
+                return res.status(400).json({ error: 'Favor verificar o Nome(É obrigatório)' })
+            }
 
             if (!cep) {
                 return res.status(400).json({ error: 'Favor verificar o CEP(É obrigatório)' })
@@ -23,8 +45,8 @@ class DestinosController {
                 return res.status(400).json({ error: 'Usuário não encontrado' });
             }
             const ceps = req.body.cep
-            let buscaCoordenadas = await axios.get(`https://nominatim.openstreetmap.org/search?postalcode=${ceps}&format=json&addressdetails=1&limit=1`);
-            const coordenadas = {}
+            let buscaCoordenadas = await axios.get(`https://nominatim.openstreetmap.org/search?postalcode=${ceps}&format=json&addressdetails=1&limit=1`)
+            // const coordenadas = {}
             let lat = null
             let lon = null
             let display_name = null
@@ -36,6 +58,7 @@ class DestinosController {
             }
 
             const destino = await Destino.create({
+                nome_destino,
                 cep,
                 descricao,
                 latitude: lat,
@@ -53,7 +76,9 @@ class DestinosController {
 
     async listaDestino(req, res) {
         try {
-            const listar_destino = await Destino.findAll()
+            const decoded = verify(req.headers.authorization, process.env.SECRET_JWT)
+            const autDestino = decoded.usuario_id
+            const listar_destino = await Destino.findAll({ where: { usuario_id: autDestino } })
             res.json(listar_destino)
         } catch (error) {
             res.status(400).json({ erro: 'Não foi possível listar os destinos do usuário' })
@@ -85,14 +110,11 @@ class DestinosController {
         const decoded = verify(req.headers.authorization, process.env.SECRET_JWT)
         const usuario_inf = decoded.usuario_id
 
-        console.log(typeof usuario_inf)
-        console.log(typeof req.body.usuario_id)
         try {
             const destino = await Destino.findByPk(id)
             if (!destino) {
                 res.status(400).json({ error: 'Este destino não foi encontrado, favor verificar!' })
             }
-            console.log(destino.usuario_id)
             if (destino.usuario_id === usuario_inf) {
                 await destino.update({
                     cep,
@@ -105,29 +127,26 @@ class DestinosController {
                 await destino.save()
                 res.status(200).json({ mensagem: "Alterado com sucesso" })
             } else {
-                res.status(403).json({ error: 'Você não tem permissão para atualizar este destino.' })
+                res.status(401).json({ error: 'Você não tem permissão para atualizar este destino.' })
             }
         } catch (error) {
-            console.log(error)
             res.status(400).json({ error: 'Error ao atulizar o destino' })
         }
     }
 
     async deletarDestino(req, res) {
         const { id } = req.params
+        const decoded = verify(req.headers.authorization, process.env.SECRET_JWT)
+        const usuario_del = decoded.usuario_id
         try {
             const destino = await Destino.findByPk(id)
-            if (!destino) {
-                res.status(400).json({ error: 'Este destino não existe, favor verificar!' })
+            if (usuario_del !== destino.usuario_id) {
+                res.json({ mensagem: 'Você não tem permissão de excluir esse usuário' })
+            } else {
+                await destino.destroy()
+                res.status(204)
             }
-            destino.destroy({
-                where: {
-                    id
-                }
-            })
-            res.status(204).json({ mensagem: 'Destino excluído' })
         } catch (error) {
-            console.log(error)
             res.status(400).json(error)
         }
     }

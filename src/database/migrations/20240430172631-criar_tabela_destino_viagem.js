@@ -10,6 +10,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      nome_destino: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       cep: {
         type: Sequelize.INTEGER,
         allowNull: false
