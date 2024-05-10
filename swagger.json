@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Api para o projeto viajem",
+    "title": "Endpoints Viagem365",
     "description": "Description",
     "version": "1.0.0"
   },
@@ -13,6 +13,9 @@
   "paths": {
     "/docs": {
       "get": {
+        "tags": [
+          "Docs"
+        ],
         "description": "",
         "responses": {
           "default": {
@@ -23,6 +26,9 @@
     },
     "/login/": {
       "post": {
+        "tags": [
+          "Login"
+        ],
         "description": "",
         "parameters": [
           {
@@ -32,10 +38,10 @@
               "type": "object",
               "properties": {
                 "email": {
-                  "example": "any"
+                  "example": "teste@gmail.com"
                 },
                 "senha": {
-                  "example": "any"
+                  "example": "1234"
                 }
               }
             }
@@ -59,6 +65,9 @@
     },
     "/usuarios/": {
       "post": {
+        "tags": [
+          "Usuario"
+        ],
         "description": "",
         "parameters": [
           {
@@ -68,25 +77,25 @@
               "type": "object",
               "properties": {
                 "nome": {
-                  "example": "any"
+                  "example": "Lucas Lino Martins"
                 },
                 "sexo": {
-                  "example": "any"
+                  "example": "Masculino"
                 },
                 "cpf": {
-                  "example": "any"
+                  "example": "01223112111"
                 },
                 "email": {
-                  "example": "any"
+                  "example": "teste@gmail.com"
                 },
                 "senha": {
-                  "example": "any"
+                  "example": "1234"
                 },
                 "endereco": {
-                  "example": "any"
+                  "example": "Rua Hipólito de azevedo"
                 },
                 "data_nascimento": {
-                  "example": "any"
+                  "example": "1998-04-06"
                 }
               }
             }
@@ -127,16 +136,13 @@
               "type": "object",
               "properties": {
                 "cep": {
-                  "example": "any"
+                  "example": "88190000"
                 },
-                "in": {
-                  "example": "any"
+                "descricao": {
+                  "example": "Uma praia muito boa para ir fora de temporada, temporada tem muito movimento."
                 },
-                "description": {
-                  "example": "any"
-                },
-                "schema": {
-                  "example": "any"
+                "nome_destino": {
+                  "example": "Praia de Palmas"
                 }
               }
             }
@@ -155,6 +161,9 @@
         }
       },
       "get": {
+        "tags": [
+          "Destinos"
+        ],
         "description": "",
         "parameters": [
           {
@@ -178,6 +187,9 @@
     },
     "/destinos/{id}": {
       "get": {
+        "tags": [
+          "Destinos"
+        ],
         "description": "",
         "parameters": [
           {
@@ -205,6 +217,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Destinos"
+        ],
         "description": "",
         "parameters": [
           {
@@ -225,22 +240,22 @@
               "type": "object",
               "properties": {
                 "cep": {
-                  "example": "any"
+                  "example": "88190132"
                 },
                 "descricao": {
-                  "example": "any"
+                  "example": "Teste de descrição"
                 },
                 "latitude": {
-                  "example": "any"
+                  "example": "0"
                 },
                 "longetude": {
-                  "example": "any"
+                  "example": "0"
                 },
                 "endereco": {
-                  "example": "any"
+                  "example": "Esse endereço é para teste"
                 },
                 "usuario_id": {
-                  "example": "any"
+                  "example": "1"
                 }
               }
             }
@@ -259,6 +274,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Destinos"
+        ],
         "description": "",
         "parameters": [
           {

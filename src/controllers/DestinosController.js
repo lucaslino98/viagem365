@@ -5,25 +5,7 @@ const axios = require('axios')
 class DestinosController {
 
     async cadastrarDestino(req, res) {
-/* 
- 
-            #swagger.tags = ['Destinos'],
-            #swagger.parameters['body'] = {
-                in: 'body',
-                description: 'Adiciona um novo Destino',
-                schema: {
-                $nome_destino:"Praia de gov"
-                $cep:"88190000"
-                $descricao:"boa praia"
-                $latitude: "123123"
-                $longetude:"44421"
-                $endereco: "hipotito de azevedo"
-                $usuario_id: 2
-            }
-        }
-    
 
-*/
         try {
             const { cep, descricao, nome_destino } = req.body
             const decoded = verify(req.headers.authorization, process.env.SECRET_JWT)
