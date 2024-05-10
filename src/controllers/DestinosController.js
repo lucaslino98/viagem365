@@ -46,7 +46,6 @@ class DestinosController {
             }
             const ceps = req.body.cep
             let buscaCoordenadas = await axios.get(`https://nominatim.openstreetmap.org/search?postalcode=${ceps}&format=json&addressdetails=1&limit=1`)
-            // const coordenadas = {}
             let lat = null
             let lon = null
             let display_name = null

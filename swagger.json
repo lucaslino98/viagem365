@@ -11,6 +11,16 @@
     "http"
   ],
   "paths": {
+    "/docs": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/login/": {
       "post": {
         "description": "",
@@ -138,6 +148,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
