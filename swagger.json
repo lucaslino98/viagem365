@@ -38,10 +38,10 @@
               "type": "object",
               "properties": {
                 "email": {
-                  "example": "teste@gmail.com"
+                  "example": "lucas.teste@hotmail.com"
                 },
                 "senha": {
-                  "example": "1234"
+                  "example": "teste123"
                 }
               }
             }
