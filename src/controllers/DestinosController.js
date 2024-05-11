@@ -68,12 +68,8 @@ class DestinosController {
 
     async listarDestinoDeUsuario(req, res) {
         try {
-            const { id } = req.params;
-            const destinosUsuario = await Destino.findAll({
-                where: {
-                    usuario_id: id
-                }
-            });
+            const { id } = req.params
+            const destinosUsuario = await Destino.findByPk(id)
 
             if (!destinosUsuario || destinosUsuario.length === 0) {
                 return res.status(400).json({ erro: 'O usuário informado não existe ou não cadastrou nenhum destino.' });
