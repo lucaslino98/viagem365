@@ -121,7 +121,7 @@ class DestinosController {
                 res.json({ mensagem: 'Você não tem permissão de excluir esse usuário' })
             } else {
                 await destino.destroy()
-                res.status(204)
+                res.status(204).json({mensagem:"deletado"})
             }
         } catch (error) {
             res.status(400).json(error)

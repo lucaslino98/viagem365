@@ -14,9 +14,6 @@ class usuarioController {
             if (!cpf) {
                 return res.status(400).json({ erro: 'O cpf deve ser informado' })
             }
-            // if (cpf > 11) {
-            //     return res.status(400).json({ erro: 'Deve ser informado os 11 números do seu CPF.' })
-            // }
             if (!endereco) {
                 return res.status(400).json({ erro: 'O endereço deve ser informado' })
             }
