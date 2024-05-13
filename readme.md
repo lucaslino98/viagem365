@@ -1,38 +1,89 @@
-# Semana 10 - Introdução ao Sequelize
 
-## Rodar o repositório:
+#  VIAGEM 365
 
-### Na primeira vez é necessário instalar as dependencias:
-1. `npm install`
-2. Se for em ambiente local: `npm install --dev`
-3. `cp .env_example .env`
+Projeto voltado para troca de informações entre usuários. Onde cada usuário vai poder cadastrar destinos que frequentou em sua viajem e dar uma breve descrição sobre o mesmo.
 
-### Para rodar o repositório em ambiente local
-1. `npm run start:dev`
 
-## Trabalhando com migrations:
 
-### Criar uma migration
-1. `sequelize migration:generate --name criar_tabela_alunos`
-2. `npx sequelize-cli migration:generate --name criar_tabela_alunos`
-### Rodar uma migration. Opções:
-1. Opção nº 1: `sequelize db:migrate`
-2. Opção nº 2: `npx sequelize db:migrate`
+## Tecnologias Utilizadas
 
-### Reverter a última migration:
-1. `sequelize-cli db:migrate:undo`
-2. `npx sequelize-cli db:migrate:undo`
+-   **Linguagem:** JavaScript
+-   **Framework:** Sequelize
+-   **Banco de Dados:** PostgreSQL
 
-## Documentação do Sequelize:
-https://sequelize.org/docs/v6/core-concepts/model-basics/
+## Como utilizar esta API
 
-## Novas Bibliotecas utilizadas:
+Na primeira vez você ira ter que clonar o respositório 
+```bash
+cd "caminho/da/sua/pasta"
+git clone https://github.com/lucaslino98/viagem365
+cd "viagem365"
+code ./ #Abrirá o Vscode na raiz do projeto
+```
 
-### instalar o sequelize
-`npm install sequelize` 
-### instalar o driver do PostgreSQL
-`npm install pg` 
-### instalar o CLI do sequelize
-`npm install -g sequelize-cli` 
-### instalar o dotenv
-`npm install dotenv`
+Após isso precisamos instalar as dependencias
+
+```bash
+`npm install`
+ Se for em ambiente local: `npm install --dev`
+```
+## Configure o ambiente
+Na raiz do projeto, localize o arquivo .env.example, duplique-o e altere seu nome para .env, neste arquivo ficarão as credenciais do banco de dados e outras configurações sensíveis que não são compartilháveis.
+
+```bash
+DIALECT=postgres
+HOST=localhost
+USERNAMEDB= #Nome do usuario para acessar o banco de dados
+PASSWORDDB= #Senha para acessar o banco
+DATABASE=trip
+PORT=5432
+PORT_API= #Utilizar a porta que sua API irá rodar
+SECRET_JWT= #Senha do seu token JWT
+```
+
+Execute este comando para criar as migrações no banco de dados
+```bash
+`sequelize db:migrate`
+`npx sequelize db:migrate`
+```
+Execute este comando para popular o banco de dados com as SEEDERS
+```bash
+`sequelize db:seed:all` 
+```
+
+Para rodar o repositório em um ambiente local
+
+```bash
+`npm run start:dev`
+```
+
+Para acessar os endpoints utilize
+```bash
+http://localhost:3100/docs
+```
+
+
+
+    
+## Bibliotecas utilizadas
+
+[axios](https://www.npmjs.com/package/axios) \
+[cors](https://www.npmjs.com/package/cors) \
+[dotenv](https://www.npmjs.com/package/dotenv) \
+[express](https://www.npmjs.com/package/express) \
+[jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) \
+[pg](https://www.npmjs.com/package/pg) \
+[pg-connection-string](https://www.npmjs.com/package/pg-connection-string) \
+[sequelize](https://www.npmjs.com/package/sequelize) \
+[swagger-autogen](https://www.npmjs.com/package/swagger-autogen) \
+[swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express) 
+
+
+## Melhorias
+
+- Criar uma interface para melhor experiência do usuário.
+- Ter um sistema de roteiros. Após a pessoa cadastrar um destino a mesma pode adicionar seu roteiro utilizado pela cidade, sendo assim ajudando um outro usúario a otimizar tempo antes de criar o roteiro.
+- Criar campos para o usuário adicionarem fotos dos destinos.
+- Criar um sistema dentro desta API, onde quando o cliente vizualizar o destino após cadstrar o mesmo poder ter opções de hotéis, restaurantes.
+
+
