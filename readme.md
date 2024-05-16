@@ -8,7 +8,7 @@ Projeto voltado para troca de informações entre usuários. Onde cada usuário 
 ## Tecnologias Utilizadas
 
 -   **Linguagem:** JavaScript
--   **Framework:** Sequelize
+-   **Framework:**  Express
 -   **Banco de Dados:** PostgreSQL
 
 ## Como utilizar esta API
